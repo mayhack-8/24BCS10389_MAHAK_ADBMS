@@ -1,0 +1,13 @@
+Identify Never-Sold Inventory Products
+Identify the products that exist in the inventory but have never been sold. Return the product ID and product name for each unsold product.
+Tables
+sales_transactions
+inventory_current_stock
+SOLUTION:
+SELECT
+    i.product_id,
+    i.product_name
+FROM inventory_current_stock AS i
+LEFT JOIN sales_transactions AS s
+ON i.product_id = s.product_id
+WHERE s.product_id IS NULL;

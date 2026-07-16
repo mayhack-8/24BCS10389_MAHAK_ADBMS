@@ -1,0 +1,24 @@
+Common Friends Script
+You are analyzing a social network dataset at Google. Your task is to find mutual friends between two users, Karl and Hans. There is only one user named Karl and one named Hans in the dataset.
+The output should contain 'user_id' and 'user_name' columns.
+Tables
+users
+friends
+Solution:
+SELECT u.user_id,
+       u.user_name
+FROM friends f1
+JOIN friends f2
+    ON f1.friend_id = f2.friend_id
+JOIN users u
+    ON u.user_id = f1.friend_id
+WHERE f1.user_id = (
+        SELECT user_id
+        FROM users
+        WHERE user_name = 'Karl'
+      )
+  AND f2.user_id = (
+        SELECT user_id
+        FROM users
+        WHERE user_name = 'Hans'
+      );
