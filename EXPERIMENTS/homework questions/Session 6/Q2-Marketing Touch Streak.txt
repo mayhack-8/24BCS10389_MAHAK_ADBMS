@@ -1,0 +1,50 @@
+Marketing Touch Streak
+Snowflake SQL Interview Question
+
+As a Data Analyst on Snowflake's Marketing Analytics team, your objective is to analyze customer relationship management (CRM) data and identify contacts that satisfy two conditions:
+
+Contacts who had a marketing touch for three or more consecutive weeks.
+Contacts who had at least one marketing touch of the type 'trial_request'.
+Marketing touches, also known as touch points, represent the interactions or points of contact between a brand and its customers.
+
+Your goal is to generate a list of email addresses for these contacts.
+
+SOLUTION:
+
+WITH weeks AS (
+    SELECT DISTINCT
+        contact_id,
+        DATE_TRUNC('week', event_date)::date AS week_start
+    FROM marketing_touches
+),
+
+streaks AS (
+    SELECT
+        contact_id,
+        week_start,
+        week_start - (ROW_NUMBER() OVER (
+            PARTITION BY contact_id
+            ORDER BY week_start
+        ) * INTERVAL '1 week') AS grp
+    FROM weeks
+),
+
+valid_streak AS (
+    SELECT contact_id
+    FROM streaks
+    GROUP BY contact_id, grp
+    HAVING COUNT(*) >= 3
+),
+
+trial AS (
+    SELECT DISTINCT contact_id
+    FROM marketing_touches
+    WHERE event_type = 'trial_request'
+)
+
+SELECT c.email
+FROM crm_contacts c
+JOIN valid_streak v
+    ON c.contact_id = v.contact_id
+JOIN trial t
+    ON c.contact_id = t.contact_id;

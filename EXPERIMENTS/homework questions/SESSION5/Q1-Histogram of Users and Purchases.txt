@@ -1,0 +1,29 @@
+Histogram of Users and Purchases
+Walmart SQL Interview Question
+
+Assume you're given a table on Walmart user transactions. Based on their most recent transaction date, write a query that retrieve the users along with the number of products they bought.
+
+Output the user's most recent transaction date, user ID, and the number of products, sorted in chronological order by the transaction date.
+
+SOLUTION:
+WITH recent_txn AS (
+    SELECT
+        user_id,
+        MAX(transaction_date) AS transaction_date
+    FROM user_transactions
+    GROUP BY user_id
+)
+
+SELECT
+    r.transaction_date,
+    r.user_id,
+    COUNT(*) AS purchase_count
+FROM recent_txn r
+JOIN user_transactions u
+    ON r.user_id = u.user_id
+   AND r.transaction_date = u.transaction_date
+GROUP BY
+    r.transaction_date,
+    r.user_id
+ORDER BY
+    r.transaction_date;

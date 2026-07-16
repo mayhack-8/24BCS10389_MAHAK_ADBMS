@@ -1,0 +1,29 @@
+First and Last Day Promotion Results
+
+The marketing team is evaluating the performance of their previously ran promotions. They are particularly interested in comparing the number of transactions on the first and last day of each promotion.
+
+Segment the results by promotion and calculate the percentage of total transactions that occurred on these days.
+
+Your output should include the promotion ID, the percentage of transactions on the first day, and the percentage of transactions on the last day.
+
+SOLUTION :
+
+SELECT
+    p.promotion_id,
+    100.0 * SUM(
+        CASE
+            WHEN o.date_sold = p.start_date THEN 1
+            ELSE 0
+        END
+    ) / COUNT(*) AS first_day_percentage,
+
+    100.0 * SUM(
+        CASE
+            WHEN o.date_sold = p.end_date THEN 1
+            ELSE 0
+        END
+    ) / COUNT(*) AS last_day_percentage
+FROM online_sales_promotions p
+JOIN online_orders o
+ON p.promotion_id = o.promotion_id
+GROUP BY p.promotion_id;
