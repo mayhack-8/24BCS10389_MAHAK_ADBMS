@@ -1,0 +1,15 @@
+EXPERIMENT-2.1
+
+i)Union:
+ https://www.codechef.com/learn/course/sql-intermediate/SQ00BS02/problems/GSQ66
+Task
+Write a query using union to stack the table 'Arts' over 'Science' and output the final table
+Note:
+The UNION statement removes the duplicate data in the new table formed.
+
+SOLUTION:
+SELECT * FROM ARTS UNION SELECT * FROM SCIENCE;
+
+
+
+
