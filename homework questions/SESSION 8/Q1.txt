@@ -1,0 +1,8 @@
+Project Cafe CodeChef
+Task
+Output the table 'Orders', limited to 5 entries.
+
+SOLUTION:
+/* Output the table 'Orders', limited to 5 entries. */
+SELECT * FROM ORDERS 
+LIMIT 5;
