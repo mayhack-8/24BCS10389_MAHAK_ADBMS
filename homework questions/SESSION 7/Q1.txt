@@ -1,0 +1,7 @@
+Project- XYZ Pvt Ltd
+Task
+Write a query to output the details of employees in the table 'employee'. Limit to 5 rows.
+
+ SOLUTION:
+select * from employee 
+LIMIT 5;
