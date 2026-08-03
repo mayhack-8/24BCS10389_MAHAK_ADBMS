@@ -1,0 +1,19 @@
+EXPERIMENT-4.5
+Joins Practice-3
+Problems:
+
+1.Employee and Manager Names: Display a list of employee names along with their manager's names. Use the 'employees' table provided above.
+
+2.Every Possible Combination: Show every possible combination of 'customer_name' from the 'customers' table and 'product_name' from the 'products' table.
+
+SOLUTION:
+-- 1.Employee and Manager Names: Display a list of employee names along with their manager's names. Use the 'employees' table provided.
+
+-- 2.Every Possible Combination: Show every possible combination of 'customer_name' from the 'customers' table and 'product_name' from the 'products' table.
+select e1.Employee_name as employee,e2.Employee_name as Manager from employees as e1
+left join employees as e2
+on e1.Manager_id=e2.Employee_id;
+
+
+select c1.customer_name,p1.product_name from customers as c1
+cross join products as p1;
