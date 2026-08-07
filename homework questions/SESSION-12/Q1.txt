@@ -1,0 +1,12 @@
+Q1
+Task
+Write a query which does the following
+
+Join the table 'Customer' and 'Purchase' using Customer_id as the common column in the table.
+Output all entries from the joined table.
+
+SOLUTION:
+/* Write a query to join the table 'Customer' and 'Purchase' using Customer_id as the common column in the table.
+Output the joined table. */
+
+SELECT * FROM CUSTOMER AS C INNER JOIN PURCHASE AS P  ON C.CUSTOMER_ID = P.CUSTOMER_ID;
