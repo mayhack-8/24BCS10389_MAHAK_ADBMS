@@ -1,0 +1,14 @@
+session - 13
+q1
+Write a query to retrieve the top three cities that have the highest number of completed trade orders listed in descending order. Output the city name and the corresponding number of completed trade orders.
+
+solution:
+
+select c.city ,
+count(t.order_id) as total_orders 
+from  trades as t join users as c
+on t.user_id = c.user_id
+where t.status = 'Completed' 
+group by c.city 
+order by total_orders desc 
+limit 3;
