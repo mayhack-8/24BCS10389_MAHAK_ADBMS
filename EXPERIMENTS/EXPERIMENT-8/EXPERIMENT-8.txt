@@ -40,4 +40,7 @@ $$ language plpgsql
 
 
 call update_sal_proc(101,null,5300);
+OUTPUT:
 
+"status"	"p_salary"
+"success"	55300.00
